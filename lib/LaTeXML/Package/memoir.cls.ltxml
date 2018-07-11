@@ -74,7 +74,17 @@ DefMacro('\thesubparagraph',  '\theparagraph.\arabic{subparagraph}');
 DefMacro('\chaptermark{}', '');
 DefMacro('\makepsmarks{}{}', '');
 DefMacro('\makepagestyle{}', '');
+DefMacro('\AtBeginPackage{}{}', '');
+DefMacro('\AtEndPackage{}{}', '');
+DefMacro('\setlrmarginsandblock{}{}{}', '');
+DefMacro('\setlrmargins{}{}{}', '');
+DefMacro('\setulmarginsandblock{}{}{}', '');
+DefMacro('\setulmargins{}{}{}', '');
+DefMacro('\setheadfoot{}{}', '');
 
+RawTeX(<<'EoTeX');
+\newlength{\onelineskip}
+EoTeX
 
 NewCounter('equation',       'chapter',  idprefix => 'E');
 NewCounter('@equationgroup', 'document', idprefix => 'EG', idwithin => 'section');
