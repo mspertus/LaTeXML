@@ -187,6 +187,9 @@ DefMacro('\lstlisting@maketitle{}',
 DefMacro('\lstlisting@maketoctitle{}',
   '\@@toccaption{#1}');
 
+# mpstodo: This seems to take one argument but then chomp. Not sure how to do this in ltxml
+DefMacro('\lst@CheckVersion{}{}', '');
+
 # Numbered form,  with caption
 # \@listings <classes> <formatted>
 DefConstructor('\@listings {}',
