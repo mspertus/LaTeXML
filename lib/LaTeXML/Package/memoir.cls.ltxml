@@ -72,6 +72,9 @@ DefMacro('\theparagraph',     '\thesubsubsection.\arabic{paragraph}');
 DefMacro('\thesubparagraph',  '\theparagraph.\arabic{subparagraph}');
 
 DefMacro('\chaptermark{}', '');
+DefMacro('\makepsmarks{}{}', '');
+DefMacro('\makepagestyle{}', '');
+
 
 NewCounter('equation',       'chapter',  idprefix => 'E');
 NewCounter('@equationgroup', 'document', idprefix => 'EG', idwithin => 'section');
