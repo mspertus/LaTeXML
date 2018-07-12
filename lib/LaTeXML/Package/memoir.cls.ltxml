@@ -81,6 +81,18 @@ DefMacro('\setlrmargins{}{}{}', '');
 DefMacro('\setulmarginsandblock{}{}{}', '');
 DefMacro('\setulmargins{}{}{}', '');
 DefMacro('\setheadfoot{}{}', '');
+DefMacro('\setheaderspaces{}{}{}', '');
+DefMacro('\setmarginnotes{}{}{}', '');
+DefMacro('\checkandfixthelayout[]', '');
+DefMacro('\feetatbottom', '');
+DefMacro('\counterwithin', '');
+DefMacro('\counterwithout', '');
+DefMacro('\cftsetindents{}{}{}', '');
+DefMacro('\makechapterstyle{}{}', '');
+DefMacro('\makeevenhead{}{}{}{}', '');
+DefMacro('\makeoddhead{}{}{}{}', '');
+DefMacro('\makeevenfoot{}{}{}{}', '');
+DefMacro('\makeoddfoot{}{}{}{}', '');
 
 RawTeX(<<'EoTeX');
 \newlength{\onelineskip}
