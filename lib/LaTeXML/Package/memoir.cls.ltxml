@@ -94,10 +94,87 @@ DefMacro('\makeoddhead{}{}{}{}', '');
 DefMacro('\makeevenfoot{}{}{}{}', '');
 DefMacro('\makeoddfoot{}{}{}{}', '');
 DefMacro('\aliaspagestyle{}{}', '');
-DefMacro('\setbeforecskip{}', '');
+DefMacro('\setbeforesecskip{}', '');
     
 RawTeX(<<'EoTeX');
 \newlength{\onelineskip}
+\newlength{\secindent}
+\newcommand{\setsecindent}[1]{\setlength{\secindent}{#1}}
+  \setsecindent{\z@}
+\newskip\beforesecskip
+\newcommand{\setbeforesecskip}[1]{\setlength{\beforesecskip}{#1}}
+  \setbeforesecskip{-3.5ex \@plus -1ex \@minus -.2ex}
+\newskip\aftersecskip
+\newcommand{\setaftersecskip}[1]{\setlength{\aftersecskip}{#1}}
+  \setaftersecskip{2.3ex \@plus .2ex}
+\newcommand{\secheadstyle}{}
+\newcommand{\setsecheadstyle}[1]{\renewcommand{\secheadstyle}{#1}}
+  \setsecheadstyle{\Large\bfseries\memRTLraggedright}
+
+\newlength{\subsecindent}
+\newcommand{\setsubsecindent}[1]{\setlength{\subsecindent}{#1}}
+  \setsubsecindent{\z@}
+\newskip\beforesubsecskip
+\newcommand{\setbeforesubsecskip}[1]{\setlength{\beforesubsecskip}{#1}}
+  \setbeforesubsecskip{-3.25ex \@plus -1ex \@minus -.2ex}
+\newskip\aftersubsecskip
+\newcommand{\setaftersubsecskip}[1]{\setlength{\aftersubsecskip}{#1}}
+  \setaftersubsecskip{1.5ex \@plus .2ex}
+\newcommand{\subsecheadstyle}{}
+\newcommand{\setsubsecheadstyle}[1]{\renewcommand{\subsecheadstyle}{#1}}
+  \setsubsecheadstyle{\large\bfseries\memRTLraggedright}
+\newlength{\subsubsecindent}
+\newcommand{\setsubsubsecindent}[1]{%
+            \setlength{\subsubsecindent}{#1}}
+  \setsubsubsecindent{\z@}
+\newskip\beforesubsubsecskip
+\newcommand{\setbeforesubsubsecskip}[1]{%
+            \setlength{\beforesubsubsecskip}{#1}}
+  \setbeforesubsubsecskip{-3.25ex \@plus -1ex \@minus -.2ex}
+\newskip\aftersubsubsecskip
+\newcommand{\setaftersubsubsecskip}[1]{%
+            \setlength{\aftersubsubsecskip}{#1}}
+  \setaftersubsubsecskip{1.5ex \@plus .2ex}
+\newcommand{\subsubsecheadstyle}{}
+\newcommand{\setsubsubsecheadstyle}[1]{%
+            \renewcommand{\subsubsecheadstyle}{#1}}
+  \setsubsubsecheadstyle{\normalsize\bfseries\memRTLraggedright}
+\newlength{\paraindent}
+\newcommand{\setparaindent}[1]{\setlength{\paraindent}{#1}}
+  \setparaindent{\z@}
+\newskip\beforeparaskip
+\newcommand{\setbeforeparaskip}[1]{\setlength{\beforeparaskip}{#1}}
+  \setbeforeparaskip{3.25ex \@plus 1ex \@minus .2ex}
+\newskip\afterparaskip
+\newcommand{\setafterparaskip}[1]{\setlength{\afterparaskip}{#1}}
+  \setafterparaskip{-1em}
+\newcommand{\paraheadstyle}{}
+\newcommand{\setparaheadstyle}[1]{\renewcommand{\paraheadstyle}{#1}}
+  \setparaheadstyle{\normalsize\bfseries}
+
+\newlength{\subparaindent}
+\newcommand{\setsubparaindent}[1]{%
+            \setlength{\subparaindent}{#1}}
+  \setsubparaindent{\parindent}
+\newskip\beforesubparaskip
+\newcommand{\setbeforesubparaskip}[1]{%
+            \setlength{\beforesubparaskip}{#1}}
+  \setbeforesubparaskip{3.25ex \@plus 1ex \@minus .2ex}
+\newskip\aftersubparaskip
+\newcommand{\setaftersubparaskip}[1]{%
+            \setlength{\aftersubparaskip}{#1}}
+  \setaftersubparaskip{-1em}
+\newcommand{\subparaheadstyle}{}
+\newcommand{\setsubparaheadstyle}[1]{%
+            \renewcommand{\subparaheadstyle}{#1}}
+  \setsubparaheadstyle{\normalsize\bfseries}
+
+\newlength{\footmarkwidth}
+\newlength{\footmarksep}
+\newlength{\footparindent}
+\newcommand*{\footmarkstyle}[1]{\def\footscript##1{#1}}
+\newcommand{\makefootmarkhook}{}
+
 EoTeX
 
 NewCounter('equation',       'chapter',  idprefix => 'E');
