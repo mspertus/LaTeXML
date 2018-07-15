@@ -41,6 +41,17 @@ DefEnvironment('{description} OptionalUndigested',
   beforeDigestEnd => sub { Digest('\par'); },
   locked => 1, mode => 'text');
 
+DefMacro('\newlist{}{}{}', sub {
+    my $name = ToString($_[1]);
+    my $type = ToString($_[2]);
+
+    DefEnvironment("{$name} OptionalUndigested",
+		   "<ltx:itemize xml:id='#id'>#body</ltx:itemize>",
+		   properties => sub { beginItemize("$type", '@item'); },
+		   beforeDigestEnd => sub { Digest('\par'); },
+		   locked => 1, mode => 'text');   
+	 });
+
 DefMacro('\setlist OptionalUndigested {}', '');
 
 #======================================================================

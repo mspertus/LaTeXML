@@ -94,7 +94,6 @@ DefMacro('\makeoddhead{}{}{}{}', '');
 DefMacro('\makeevenfoot{}{}{}{}', '');
 DefMacro('\makeoddfoot{}{}{}{}', '');
 DefMacro('\aliaspagestyle{}{}', '');
-DefMacro('\setbeforesecskip{}', '');
     
 RawTeX(<<'EoTeX');
 \newlength{\onelineskip}
