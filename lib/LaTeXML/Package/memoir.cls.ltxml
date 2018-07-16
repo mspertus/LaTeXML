@@ -181,6 +181,11 @@ RawTeX(<<'EoTeX');
 
 EoTeX
 
+DefConstructor('\glossary[]{}{}',
+  "<ltx:glossaryphrase role='glossary' key='#key'>#3</ltx:glossaryphrase>",
+  properties => { key => sub { CleanIndexKey($_[2]); } },
+  sizer => 0);
+
 NewCounter('equation',       'chapter',  idprefix => 'E');
 NewCounter('@equationgroup', 'document', idprefix => 'EG', idwithin => 'section');
 NewCounter('figure',         'chapter',  idprefix => 'F');
