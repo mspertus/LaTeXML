@@ -189,6 +189,10 @@ DefMacro('\lstlisting@maketoctitle{}',
 
 # mpstodo: This seems to take one argument but then chomp. Not sure how to do this in ltxml
 DefMacro('\lst@CheckVersion{}{}', '');
+DefMacro('\lst@Key{}{}', '');
+DefMacro('\lst@AddToHook', '');
+DefMacro('\lst@SaveDef{}{}', '');
+DefMacro('\lst@DefSaveDef{}{}', '');
 
 # Numbered form,  with caption
 # \@listings <classes> <formatted>

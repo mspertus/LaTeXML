@@ -94,7 +94,12 @@ DefMacro('\makeoddhead{}{}{}{}', '');
 DefMacro('\makeevenfoot{}{}{}{}', '');
 DefMacro('\makeoddfoot{}{}{}{}', '');
 DefMacro('\aliaspagestyle{}{}', '');
-    
+DefMacro('\captionstyle{}', '');
+DefMacro('\captiondelim{}', '');
+
+NewCounter('maxsecnumdepth');
+DefMacro('\maxsecnumdepth{}', '');
+
 RawTeX(<<'EoTeX');
 \newlength{\onelineskip}
 \newlength{\secindent}
