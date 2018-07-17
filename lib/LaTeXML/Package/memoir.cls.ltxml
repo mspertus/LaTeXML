@@ -96,6 +96,8 @@ DefMacro('\makeoddfoot{}{}{}{}', '');
 DefMacro('\aliaspagestyle{}{}', '');
 DefMacro('\captionstyle{}', '');
 DefMacro('\captiondelim{}', '');
+DefMacro('\tablerefname', 'Table');
+
 
 NewCounter('maxsecnumdepth');
 DefMacro('\maxsecnumdepth{}', '');
@@ -178,13 +180,64 @@ RawTeX(<<'EoTeX');
 \newlength{\footparindent}
 \newcommand*{\footmarkstyle}[1]{\def\footscript##1{#1}}
 \newcommand{\makefootmarkhook}{}
-
 EoTeX
 
 DefConstructor('\glossary[]{}{}',
   "<ltx:glossaryphrase role='glossary' key='#key'>#3</ltx:glossaryphrase>",
   properties => { key => sub { CleanIndexKey($_[2]); } },
   sizer => 0);
+
+# Cutting and pasting a bunch of index stuff from LaTeX.pool.ltxml with
+# slight modifications for memoir
+my %index_style = (textbf => 'bold', bf => 'bold', textrm => '', rm => '',
+  textit => 'italic', it => 'italic', emph => 'italic');    # What else?
+
+sub memoir_process_index_phrases {
+  my ($gullet, $file, $phrases) = @_;
+  my @expansion = ();
+  $phrases = Expand($phrases);
+  # Split the text into phrases, separated by "!"
+  my @tokens = $phrases->unlist;
+
+  return unless @tokens;
+  push(@tokens, T_OTHER('!')) unless $tokens[-1]->getString eq '!';    # Add terminal !
+  my @phrase = ();
+  my @sortas = ();
+  my $style;
+  while (@tokens) {
+    my $tok    = shift(@tokens);
+    my $string = $tok->getString;
+    if ($string eq '"') {
+      push(@phrase, shift(@tokens)); }
+    elsif ($string eq '@') {
+      while (@phrase && ($phrase[-1]->getString =~ /\s/)) { pop(@phrase); }    # Trim
+      @sortas = @phrase; @phrase = (); }
+    elsif (($string eq '!') || ($string eq '|')) {
+      while (@phrase && ($phrase[-1]->getString =~ /\s/)) { pop(@phrase); }    # Trim
+      push(@expansion, T_CS('\@indexphrase'),
+        (@sortas ? (T_OTHER('['), @sortas, T_OTHER(']')) : ()),
+        T_BEGIN, @phrase, T_END)
+        if @phrase;
+      @phrase = (); @sortas = ();
+      if ($string eq '|') {
+        pop(@tokens);    # Remove the extra "!" stopbit.
+        my $extra = ToString(Tokens(@tokens));
+        if ($extra =~ /^see\s*{/) { push(@expansion, T_CS('\@indexsee'), @tokens[3 .. $#tokens]); }
+        elsif ($extra =~ /^seealso\s*\{/) { push(@expansion, T_CS('\@indexseealso'), @tokens[7 .. $#tokens]); }
+        elsif ($extra eq '(') { $style = 'rangestart'; }                     # ?
+        elsif ($extra eq ')') { $style = 'rangeend'; }                       # ?
+        else                  { $style = $index_style{$extra} || $extra; }
+        @tokens = (); } }
+    elsif (!@phrase && ($string =~ /\s/)) { }                                # Skip leading whitespace
+    else {
+	push(@phrase, $tok); } }
+  @expansion = (T_CS('\@index'),
+    ($style ? (T_OTHER('['), T_OTHER($style), T_OTHER(']')) : ()),
+		T_BEGIN, @expansion, T_END);
+  return @expansion; }
+
+DefMacro('\index[]{}', \&memoir_process_index_phrases);
+
 
 NewCounter('equation',       'chapter',  idprefix => 'E');
 NewCounter('@equationgroup', 'document', idprefix => 'EG', idwithin => 'section');
