@@ -235,6 +235,8 @@ map { DefMacroI(T_CS('\\' . $_ . 'autorefname'), undef, '\itemautorefname'); }
 # \pdfstringdef{macroname}{texstring}
 DefMacro('\pdfstring{Token}{}', '\def#1{#2}');
 
+# mps todo: Needs real definition
+DefMacro('\pdfstringdefDisableCommands{}', '');
 #======================================================================
 # 4.1 Replacement macros
 

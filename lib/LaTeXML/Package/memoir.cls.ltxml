@@ -97,7 +97,7 @@ DefMacro('\aliaspagestyle{}{}', '');
 DefMacro('\captionstyle{}', '');
 DefMacro('\captiondelim{}', '');
 DefMacro('\tablerefname', 'Table');
-
+DefMacro('\chapterstyle{}', '');
 
 NewCounter('maxsecnumdepth');
 DefMacro('\maxsecnumdepth{}', '');
